@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "SaleryGraph";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SaleryGraph</h2>
+
+<div id="chart"></div>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: 'Get', contentType: "application/json; charset=utf-8", dataType: "json", url: "/api/Employe/GetEmployeSalery",
+            success: function (res) {
+                CreateGraph(res);
+            },
+            error: function (xhr, thrownError) {
+            }, cache: false, async: false
+        });
+    });
+
+    function CreateGraph(data) {
+        $("#chart").dxChart({
+            "dataSource": data,
+            "series": {}
+        });
+    };
+</script>
+
+
+
